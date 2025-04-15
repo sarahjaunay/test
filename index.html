@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Sneakers</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logo.ico" type="image/x-icon">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo"> <a href="index.html"> <img src="images/logo.png" alt="Logo du site"></a></div>
+        <nav>
+            <ul class="menu">
+                <li><a href="index.html">Chaussures</a></li>
+                <li><a href="quisommesnous.html">Qui sommes-nous</a></li>
+                <li><a href="contact.html">Contactez-nous</a></li>
+                <li><a href="panier.html" class="cart-link">Panier (0)</a></li> <!-- Lien vers le panier -->
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Bienvenue chez SNEAKERS</h1>
+            <p>Découvrez nos baskets tendance et confortables</p>
+        </div>
+    </section>
+
+    <div class="baniere">
+        <img src="images/diapo1.png" alt="image chaussures">
+    </div>
+
+   <!-- Filtre Produit-->
+   <section class="filter">
+    <h2>Filtrer les produits</h2>
+    <form id="filter-form" method="get">
+        <div class="filter-item">
+            <label for="category">Catégorie :</label>
+            <select id="category" name="category">
+                <option value="toutes">Toutes</option>
+                <option value="basket">Baskets</option>
+                <option value="running">Running</option>
+                <option value="casual">Casual</option>
+            </select>
+        </div>
+        <div class="filter-item">
+            <label for="size">Taille :</label>
+            <select id="size" name="size">
+                <option value="toutes">Toutes</option>
+                <option value="38">38</option>
+                <option value="39">39</option>
+                <option value="40">40</option>
+                <option value="41">41</option>
+                <option value="42">42</option>
+                <option value="43">43</option>
+                <option value="44">44</option>
+            </select>
+        </div>
+        <div class="filter-item">
+            <label for="price">Prix :</label>
+            <input type="range" id="price" name="price" min="0" max="100" step="1" value="100">
+            <span id="price-value">100€</span>
+        </div>
+        <div class="filter-item">
+            <button type="button" id="apply-filters" class="btn">Appliquer les filtres</button>
+        </div>
+    </form>
+</section>
+    
+    <!-- Section Produits -->
+    <section class="products">
+        <h2>Nos Produits</h2>
+        <div id="product-list" class="product-list">
+            <!-- Les produits seront affichés ici après application des filtres -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="image-container">
+            <a href="#" aria-label="Instagram"><img src="images/11.png" alt="lien Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><img src="images/14.png" alt="Lien Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" aria-label="Pinterest"><img src="images/13.png" alt="Lien Pinterest"><i class="fa-brands fa-pinterest"></i></a>
+        </div>
+        <p>&copy; 2025 Sneakers. Tous droits réservés.</p>
+
+    </footer>
+
+    <script>
+        // Données des produits simulées
+        const products = [
+            { id: 1, name: "Basket Adidas Ultra", category: "basket", size: 40, price: 69.99, image: "images/adidenf2.png" },
+            { id: 2, name: "Asics RunAway", category: "running", size: 42, price: 59.99, image: "images/homnoir1.webp" },
+            { id: 3, name: "Ninja Casual 3", category: "casual", size: 41, price: 79.99, image: "images/inchom2.png" },
+            { id: 4, name: "Puma 207 rose", category: "basket", size: 39, price: 89.99, image: "images/pumenfrose2.png" },
+            { id: 5, name: "Reebok Fem 2", category: "running", size: 43, price: 65.99, image: "images/rebfem2.png" },
+            { id: 6, name: "Adidas kiloup", category: "running", size: 38, price: 45.99, image:"images/femadid2.png" },
+            { id: 7, name: "Asics Coco", category: "casual", size: 43, price: 89.99, image: "images/femcreme1.webp" },
+            { id: 8, name: "New Balance 1908", category: "basket", size: 43, price: 67.99, image: "images/newbenf2.png" },
+            { id: 9, name: "Asics keolis", category: "casual", size: 41, price: 75.99, image: "images/oasichom2.png" },
+            { id: 10, name: "Veja running", category: "running", size: 43, price: 95.99, image: "images/veja2.webp" },
+
+
+        ];
+
+        // Fonction pour afficher les produits
+        function displayProducts(filteredProducts) {
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = ""; // Efface les anciens produits affichés
+
+            if (filteredProducts.length === 0) {
+                productList.innerHTML = '<p>Aucun produit trouvé avec ces critères.</p>';
+            } else {
+                filteredProducts.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.classList.add('product-card');
+                    productCard.innerHTML = `
+                        <img src="${product.image}" alt="${product.name}">
+                        <h3>${product.name}</h3>
+                        <p class="price">${product.price}€</p>
+                        <a href="detailsproduit${product.id}.html" class="btn">Voir le produit</a>
+                        <button class="ajouterPanier">Ajouter au panier</button>
+                    `;
+                    productList.appendChild(productCard);
+                });
+            }
+        }
+
+        // Fonction de filtrage des produits
+        function filterProducts() {
+            const category = document.getElementById('category').value;
+            const size = document.getElementById('size').value;
+            const maxPrice = document.getElementById('price').value;
+
+            const filteredProducts = products.filter(product => {
+                const matchesCategory = category === "toutes" || product.category === category;
+                const matchesSize = size === "toutes" || product.size == size;
+                const matchesPrice = product.price <= maxPrice;
+
+                return matchesCategory && matchesSize && matchesPrice;
+            });
+
+            displayProducts(filteredProducts);
+        }
+
+        // Mettre à jour la valeur du prix en fonction du curseur
+        const priceSlider = document.getElementById('price');
+        const priceValue = document.getElementById('price-value');
+        priceSlider.addEventListener('input', () => {
+            priceValue.textContent = `${priceSlider.value}€`;
+        });
+
+        // Appliquer les filtres lorsque l'utilisateur clique sur le bouton
+        document.getElementById('apply-filters').addEventListener('click', filterProducts);
+
+        // Afficher tous les produits au départ
+        displayProducts(products);
+        
+    </script>
+</body>
+
+</html>
+

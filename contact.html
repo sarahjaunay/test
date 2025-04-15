@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Sneakers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo"> <a href="index.html"> <img src="images/logo.png" alt="Logo du site"></a></div>
+        <nav>
+            <ul class="menu">
+                <li><a href="index.html">Chaussures</a></li>
+                <li><a href="quisommesnous.html">Qui sommes-nous</a></li>
+                <li><a href="contact.html">Contactez-nous</a></li>
+                <li><a href="panier.html" class="cart-link">Panier (0)</a></li> <!-- Lien vers le panier -->
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Section Contact -->
+    <section class="contact">
+        <h2>Contactez-nous</h2>
+        <p>Si vous avez des questions ou des demandes, n'hésitez pas à nous contacter. Remplissez le formulaire ci-dessous, et nous vous répondrons dans les plus brefs délais.</p>
+
+        <form action="submit_form.php" method="POST">
+            <label for="name">Nom :</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message :</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit" class="btn">Envoyer</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="image-container">
+            <a href="#" aria-label="Instagram"><img src="images/11.png" alt="lien Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><img src="images/14.png" alt="Lien Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" aria-label="Pinterest"><img src="images/13.png" alt="Lien Pinterest"><i class="fa-brands fa-pinterest"></i></a>
+        </div>
+        <p>&copy; 2025 Sneakers. Tous droits réservés.</p>
+
+    </footer>
+
+    <script src="script.js"></script> <!-- Script pour gérer le panier -->
+
+</body>
+</html>
